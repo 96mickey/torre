@@ -11,7 +11,6 @@ export class Jobs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
             searchKeyword: "",
             jobs: [],
             offset: 0,
@@ -25,15 +24,12 @@ export class Jobs extends React.Component {
      * @param {boolean} resetState 
      */
     prepareDataToFetchJobsList(resetState) {
-        if(this.state.loading) {
-            return;
-        }
         if(resetState === true) { // this will trigger on search keyword updation
             this.setState({
                 jobs: [],
                 offset: 0,
                 hasMore: true
-            }, this.setJobList);
+            });
         } else {
             this.setJobList();
         }
@@ -41,7 +37,6 @@ export class Jobs extends React.Component {
 
     // getting job list and setting it in state, using search keyword
     setJobList() {
-        this.setState({loading: true});
         const {offset, size, searchKeyword} = this.state;
         const params = new URLSearchParams({
             offset,
@@ -64,20 +59,17 @@ export class Jobs extends React.Component {
             } else {
                 stateToUpdate.offset = this.state.offset + this.state.size;
             }
-            this.setState(stateToUpdate, () => {
-                this.setState({loading: false});
-            });
+            this.setState(stateToUpdate);
         })
         .catch(error => {
             console.error("Error! Please try again.", error);
-            this.setState({loading: false});
         });
     }
 
     // adding wait for 300 ms to avoid multiple unwanted network requests
     searchPeople = debounce(() => {
         this.prepareDataToFetchJobsList(true)
-    }, 300);
+    }, 500);
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -86,7 +78,7 @@ export class Jobs extends React.Component {
     };     
 
     render() {
-        const {searchKeyword, jobs, hasMore, loading} = this.state;
+        const {searchKeyword, jobs, hasMore} = this.state;
         return (
         <div>
             <InputSearch 
@@ -99,7 +91,7 @@ export class Jobs extends React.Component {
                 hasMore={hasMore}
                 loader={<div className="loader" key={0}> Loading... </div>}
             >
-                {jobs.length === 0 && hasMore === false && !loading ? 
+                {jobs.length === 0 && hasMore === false ? 
                     (
                         <div key='No more data found' className="people-list">
                             No data matched with this keyword, Please try again!
