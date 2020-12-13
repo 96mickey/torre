@@ -1,4 +1,4 @@
-let BaseUrl = "https://search.torre.co"; // should be fetched from environment
+const BASE_URL = "https://search.torre.co"; // should be fetched from environment
 
 /**
  * This will make a post request with given config
@@ -9,7 +9,7 @@ let BaseUrl = "https://search.torre.co"; // should be fetched from environment
  */
 export function PostData(type, userData) {
   return new Promise((resolve, reject) => {
-    fetch(BaseUrl + type, {
+    fetch(BASE_URL + type, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,9 +32,9 @@ export function PostData(type, userData) {
  * 
  * @returns the api response in json format
  */
-export function GetData(type) {
+export function GetData(url) {
   return new Promise((resolve, reject) => {
-    fetch(BaseUrl + type, {
+    fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

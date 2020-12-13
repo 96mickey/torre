@@ -51,7 +51,6 @@ export class Jobs extends React.Component {
 
         PostData(jobsListUrlWithQuery, payload)
         .then(result => {
-            console.log(result.results)
             const stateToUpdate = {};
             stateToUpdate.jobs = [...this.state.jobs, ...result.results];
             if(result.results < 10) {

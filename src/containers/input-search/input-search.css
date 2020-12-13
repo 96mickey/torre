@@ -9,6 +9,7 @@
 }
 
 .form_field {
+    background: transparent;
     font-family: inherit;
     width: 50%;
     border: 0;

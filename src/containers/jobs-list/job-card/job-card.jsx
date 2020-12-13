@@ -1,4 +1,4 @@
-import { faDoorOpen, faMapMarkerAlt, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faDoorOpen, faMapMarkerAlt, faMoneyBillAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './job-card.css';
@@ -8,6 +8,7 @@ export const JobCard = React.memo((props) => {
          ? props.job.locations.join() : undefined ;
     const compensation = compensationCalculator(props.job.compensation);
     const {name, logo} = getOrgInfo(props.job.organizations);
+    const deadline = getDeadline(props.job.deadline);
     return (
     <div className="job-card">
         <img src={logo || './images/company.png'} alt={name} />
@@ -26,12 +27,22 @@ export const JobCard = React.memo((props) => {
             </span>
             {props.job.objective}
         </div>
-        <div className="job-headline">
-            <span className="logo">
-                <FontAwesomeIcon icon={faMoneyBillAlt} />
-            </span>
-            {compensation}
-        </div>
+        {
+            compensation ? (<div className="job-headline">
+                <span className="logo">
+                    <FontAwesomeIcon icon={faMoneyBillAlt} />
+                </span>
+                {compensation}
+            </div>): ""
+        }
+        {
+            deadline ? (<div className="job-headline">
+                <span className="logo">
+                    <FontAwesomeIcon icon={faClock} />
+                </span>
+                {deadline}
+            </div>) : ""
+        }
         </div>
     </div>
     )
@@ -44,7 +55,7 @@ const compensationCalculator = (compensation) => {
         ctc += `${compensation.data.currency} / ${compensation.data.periodicity}`;
         return ctc;
     } else {
-        return "-";
+        return undefined;
     }
 }
 
@@ -59,4 +70,9 @@ const getOrgInfo = (orgData) => {
             logo: orgData[0].picture
         }
     }
+}
+
+const getDeadline = (time) => {
+    if(time) return new Date(time).toDateString();
+    return undefined;
 }
