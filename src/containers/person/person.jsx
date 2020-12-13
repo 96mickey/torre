@@ -6,8 +6,11 @@ import { GetData } from '../../api';
 import './person.css';
 
 /**
- * using a proxy to add 'Access-Control-Allow-Origin' in the header 
- * this will let browser accept the response
+ * using a proxy server to fetch the data and then sending it to frontend
+ * 
+ * The browser is blocking the request as the Access-Control-Allow-Origin
+ * headers are missing from the header. The proxy server will fetch the data and 
+ * send it to frontend client in the acceptable format. 
  *  */ 
 const BIO_BASE_URL = "https://cors-anywhere.herokuapp.com/https://torre.bio/api/bios/";
 

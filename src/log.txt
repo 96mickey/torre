@@ -1,0 +1,21 @@
+2 hr understanding the REQUIREMENTS and trying out the APIs
+
+1 hr for designing mock-ups  + finalising a flow 
+
+1 hr github repo setup + CI-CD for master branch using NETLIFY
+
+2 hr project setup with routing, 404 page, base setup majorly
+
+4 hr getting right resources as i don't feel comfortable writing my own css
+
+2 hr integrating people list api and setting up a basic view for each card in the list
+
+2 hr setting up INFINITE SCROLL and testing for all possible edge cases
+
+2 hr setting up KEYSTROKE BASED SEARCH (made this from scratch along with DEBOUNCE mechanism for search)
+
+2 hr setting up INFINITE SCROLL and keystroke based search for JOBS module
+
+1 hr testing on local + deployed server
+
+1 hr for profile page setup 
