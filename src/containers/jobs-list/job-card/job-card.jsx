@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './job-card.css';
 
-export const JobCard = (props) => {
+export const JobCard = React.memo((props) => {
     const location = props.job.locations && props.job.locations.length > 0
          ? props.job.locations.join() : undefined ;
     const compensation = compensationCalculator(props.job.compensation);
@@ -35,7 +35,7 @@ export const JobCard = (props) => {
         </div>
     </div>
     )
-}
+})
 
 const compensationCalculator = (compensation) => {
     let ctc = "";

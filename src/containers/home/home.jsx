@@ -4,7 +4,7 @@ import { Tabs, Tab } from '../';
 import './home.css';
 import { Jobs, People } from '../../components';
 
-export const Home = React.memo((props) => {
+export const Home = React.memo(() => {
   return (
     <div className="home-wrapper">
         <p className="home-page-heading">Explore to find awesome Talent/Opportunities</p>

@@ -3,7 +3,7 @@ import { faMapMarkerAlt, faUserTag } from '@fortawesome/free-solid-svg-icons'
 import React from 'react';
 import './people-card.css';
 
-export const PeopleCard = (props) => {
+export const PeopleCard = React.memo((props) => {
     return (
     <div className="person-card">
         <img src={props.person.picture || './images/human.jpg'} alt="logo" />
@@ -27,4 +27,4 @@ export const PeopleCard = (props) => {
         </div>
     </div>
     )
-}
+})

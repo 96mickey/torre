@@ -9,7 +9,7 @@ export const InputSearch = (props) => {
                 type="input" 
                 placeholder="Start typing search keyword"
                 className="form_field" 
-                name="searchKeyword" 
+                name={props.name} 
                 id='name' 
                 autoComplete="off"
                 value={props.value}

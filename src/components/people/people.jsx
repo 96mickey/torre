@@ -7,6 +7,10 @@ import './people.css';
 
 const PEOPLE_LIST_URL = '/people/_search/';
 
+/**
+ * Jobs and People component will be extracted to a single reusable component
+ * for next phase of this application
+ */
 export class People extends React.Component {
     constructor(props) {
         super(props);
@@ -20,11 +24,15 @@ export class People extends React.Component {
         }
     }
 
+     /**
+     * This should make decisions based on state of application
+     * @param {boolean} resetState 
+     */
     prepareDataToFetchPeopleList(resetState) {
         if(this.state.loading) {
             return;
         }
-        if(resetState === true) { 
+        if(resetState === true) { // this will trigger on search keyword updation
             this.setState({
                 people: [],
                 offset: 0,
@@ -35,6 +43,7 @@ export class People extends React.Component {
         }
     }
 
+    // getting people list and setting it in state, using search keyword
     setPeopleList() {
         this.setState({loading: true});
         const {offset, size, searchKeyword} = this.state;
@@ -68,12 +77,14 @@ export class People extends React.Component {
         });
     }
 
+    // adding wait for 300 ms to avoid multiple unwanted network requests
     searchPeople = debounce(() => {
         this.prepareDataToFetchPeopleList(true)
     }, 300);
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
+        // passing the context to make appropriate changes after specified time
         this.searchPeople(this);
     };     
 
@@ -84,6 +95,7 @@ export class People extends React.Component {
             <InputSearch 
                 handleChange={this.handleChange} 
                 value={searchKeyword} 
+                name="searchKeyword"
             />
             <InfiniteScroll
                 loadMore={this.prepareDataToFetchPeopleList.bind(this)}

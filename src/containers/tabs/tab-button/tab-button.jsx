@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const TabButtons = ({buttons, changeTab, activeTab}) =>{ 
+export const TabButtons = React.memo(({buttons, changeTab, activeTab}) =>{ 
   return(
     <div className="tab-buttons">
     {buttons.map(button => {
@@ -14,4 +14,4 @@ export const TabButtons = ({buttons, changeTab, activeTab}) =>{
     })}
     </div>
   )
-}
+})

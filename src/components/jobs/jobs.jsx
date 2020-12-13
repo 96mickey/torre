@@ -1,8 +1,7 @@
 import React from 'react';
 import InfiniteScroll from "react-infinite-scroller";
 import { PostData } from '../../api';
-import { InputSearch } from '../../containers';
-import { JobsList } from '../../containers/jobs-list/jobs-list';
+import { InputSearch, JobsList } from '../../containers';
 import { debounce } from '../../helper';
 import './jobs.css';
 
@@ -21,11 +20,15 @@ export class Jobs extends React.Component {
         }
     }
 
+    /**
+     * This should make decisions based on state of application
+     * @param {boolean} resetState 
+     */
     prepareDataToFetchJobsList(resetState) {
         if(this.state.loading) {
             return;
         }
-        if(resetState === true) { 
+        if(resetState === true) { // this will trigger on search keyword updation
             this.setState({
                 jobs: [],
                 offset: 0,
@@ -36,6 +39,7 @@ export class Jobs extends React.Component {
         }
     }
 
+    // getting job list and setting it in state, using search keyword
     setJobList() {
         this.setState({loading: true});
         const {offset, size, searchKeyword} = this.state;
@@ -70,12 +74,14 @@ export class Jobs extends React.Component {
         });
     }
 
+    // adding wait for 300 ms to avoid multiple unwanted network requests
     searchPeople = debounce(() => {
         this.prepareDataToFetchJobsList(true)
     }, 300);
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
+        // passing the context to make appropriate changes after specified time
         this.searchPeople(this);
     };     
 
@@ -86,6 +92,7 @@ export class Jobs extends React.Component {
             <InputSearch 
                 handleChange={this.handleChange} 
                 value={searchKeyword} 
+                name="searchKeyword"
             />
             <InfiniteScroll
                 loadMore={this.prepareDataToFetchJobsList.bind(this)}
