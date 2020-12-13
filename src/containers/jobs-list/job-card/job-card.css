@@ -1,0 +1,50 @@
+.job-card {
+    margin: 5px 5px;
+    width: 50%;
+    height: 100px;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: flex-start;
+}
+
+.job-card img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.job-bio {
+    height: 80px;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 2;
+}
+
+.job-card hr {
+    border-top: 1px dashed #8c8b8b; 
+}
+
+.job-name {
+    font-size: large;
+    min-width: 70%;
+    text-align: left;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.job-headline, .job-location {
+    font-size: small;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.text-with-logo {
+    margin-left: 5px;
+}
